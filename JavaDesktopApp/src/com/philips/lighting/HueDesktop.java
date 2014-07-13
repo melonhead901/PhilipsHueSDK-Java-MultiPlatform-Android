@@ -15,6 +15,8 @@ import com.philips.lighting.hue.sdk.PHHueSDK;
  */
 class HueDesktop {
 
+    // Constructor has side effects
+    @SuppressWarnings("unused")
     public static void main(String args[]) {
         new HueDesktop();
     }

@@ -32,9 +32,9 @@ public class LightColoursFrame extends JFrame  {
 
   private static final long serialVersionUID = -3830092035262367974L;
   private PHHueSDK phHueSDK;  
+  private List<PHLight> allLights;
     
   private JList <String> lightIdentifiersList;
-  private List<PHLight> allLights;
   
   public LightColoursFrame() {
     super("Bulb Colour Changer");
@@ -50,13 +50,13 @@ public class LightColoursFrame extends JFrame  {
     // To get lights use the Resource Cache.  
     allLights = bridge.getResourceCache().getAllLights();
    
-    DefaultListModel <String> sampleModel = new DefaultListModel<String>();
+    DefaultListModel<String> sampleModel = new DefaultListModel<>();
     
     for (PHLight light : allLights) {
-        sampleModel.addElement(light.getIdentifier() + "  " + light.getName() );
+      sampleModel.addElement(light.getIdentifier() + "  " + light.getName() );
     }
 
-    lightIdentifiersList = new JList<String>(sampleModel);
+    lightIdentifiersList = new JList<>(sampleModel);
     lightIdentifiersList.setVisibleRowCount(4);
     lightIdentifiersList.setSelectedIndex(0);
 
@@ -87,6 +87,7 @@ public class LightColoursFrame extends JFrame  {
   }
 
   private class ColourChanger implements ActionListener {
+    @Override
     public void actionPerformed(ActionEvent event) {
         
         Color lightColour  = JColorChooser.showDialog(getContentPane(), "Choose Bulb Color", getBackground());

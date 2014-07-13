@@ -3,11 +3,12 @@ package com.philips.lighting;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.JDialog;
+import javax.swing.WindowConstants;
 
 import com.philips.lighting.data.HueProperties;
 import com.philips.lighting.gui.AccessPointList;
 import com.philips.lighting.gui.DesktopView;
+import com.philips.lighting.gui.LightColorChangeFrame;
 import com.philips.lighting.gui.LightColoursFrame;
 import com.philips.lighting.gui.PushLinkFrame;
 import com.philips.lighting.hue.sdk.PHAccessPoint;
@@ -28,6 +29,7 @@ public class Controller {
     
     private PushLinkFrame pushLinkDialog;
     private LightColoursFrame lightColoursFrame;
+    private LightColorChangeFrame lightColorChangeFrame;
     
     private static final int MAX_HUE=65535;
     private Controller instance;
@@ -61,7 +63,7 @@ public class Controller {
             phHueSDK.startPushlinkAuthentication(accessPoint);
             
             pushLinkDialog = new PushLinkFrame(instance);
-            pushLinkDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            pushLinkDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             pushLinkDialog.setModal(true);
             pushLinkDialog.setLocationRelativeTo(null); // Center the dialog.
             pushLinkDialog.setVisible(true);
@@ -89,22 +91,26 @@ public class Controller {
                 pushLinkDialog.setVisible(false);
             }
             
-            // Enable the Buttons/Controls to change the hue bulbs.s
+            // Enable the Buttons/Controls to change the hue bulbs.
             desktopView.getRandomLightsButton().setEnabled(true);
             desktopView.getSetLightsButton().setEnabled(true);
+            desktopView.getLightColorChangeButton().setEnabled(true);
 
         }
 
         @Override
         public void onCacheUpdated(int arg0, PHBridge arg1) {
+          // Do something? 
         }
 
         @Override
         public void onConnectionLost(PHAccessPoint arg0) {
+          // Do something?
         }
 
         @Override
         public void onConnectionResumed(PHBridge arg0) {
+          // Do something?
         }
 
         @Override
@@ -193,5 +199,13 @@ public class Controller {
     
     public void showProgressBar() {
         desktopView.getFindingBridgeProgressBar().setVisible(true);
+    }
+
+    public void showLightColorChangeWindow() {
+       if (lightColorChangeFrame == null) {
+            lightColorChangeFrame = new LightColorChangeFrame(); 
+        }
+        lightColorChangeFrame.setLocationRelativeTo(null); // Centre window
+        lightColorChangeFrame.setVisible(true);
     }
 }

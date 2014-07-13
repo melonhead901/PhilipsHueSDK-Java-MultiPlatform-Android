@@ -1,6 +1,7 @@
 package com.philips.lighting.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -33,6 +34,7 @@ public class DesktopView extends JFrame {
     private JButton randomLightsButton;
     private JButton findBridgesButton;
     private JButton connectToLastBridgeButton;
+    private JButton lightColorChange;
     private JProgressBar findingBridgeProgressBar;
     
     private JTextField lastConnectedIP;
@@ -110,10 +112,21 @@ public class DesktopView extends JFrame {
             }
         });
         
+        lightColorChange = new JButton("Light Color Change");
+        lightColorChange.setEnabled(false);
+        lightColorChange.addActionListener(new ActionListener() {
+          
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            controller.showLightColorChangeWindow();
+            
+          }
+        });
+        
         double border = 10;
         double size[][] =
             {{border, 160, 20, 300, 20, 160},                 // Columns
-             {border, 26,  10, 26, 26, 26,6,26}}; // Rows
+             {border, 26,  10, 26, 26, 26,6,26, 26, 26}}; // Rows
 
         mainPanel.setLayout (new TableLayout(size));
 
@@ -131,6 +144,8 @@ public class DesktopView extends JFrame {
         
         mainPanel.add(randomLightsButton,        " 5, 5");
         mainPanel.add(setLightsButton,           " 5, 7");
+        
+        mainPanel.add(this.lightColorChange,     " 5, 9");
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(700,270));
@@ -180,5 +195,9 @@ public class DesktopView extends JFrame {
 
     public JTextField getLastUserName() {
         return lastUserName;
+    }
+
+    public Component getLightColorChangeButton() {
+      return lightColorChange;
     }
 }

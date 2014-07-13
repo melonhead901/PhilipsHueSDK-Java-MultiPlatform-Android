@@ -23,7 +23,8 @@ public class AccessPointList extends  JFrame {
  private JList<DefaultListModel<String>>     listbox;
 
  
- public AccessPointList(final List<PHAccessPoint> accessPointsList, final Controller controller)
+ @SuppressWarnings({ "rawtypes", "unchecked" })
+public AccessPointList(final List<PHAccessPoint> accessPointsList, final Controller controller)
  {
      // Set the frame characteristics
      setTitle( "PHAccess Points List" );
@@ -35,7 +36,7 @@ public class AccessPointList extends  JFrame {
      topPanel.setLayout( new BorderLayout() );
      getContentPane().add( topPanel );
 
-     DefaultListModel <String> listModel = new DefaultListModel<String>();
+     DefaultListModel<String> listModel = new DefaultListModel<>();
      
      for (PHAccessPoint accessPoint: accessPointsList) {
          listModel.addElement(accessPoint.getIpAddress());
