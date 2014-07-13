@@ -21,28 +21,29 @@ import com.philips.lighting.model.PHLightState;
 public class LightColorChangeFrame extends JFrame {
 
   /**
-   * Serial Version UID 
+   * Serial Version UID
    */
   private static final long serialVersionUID = 1807091262601041714L;
 
   private DefaultListModel<PHLightState> lightStates;
   private JList<PHLightState> colorList;
-  
+
   public LightColorChangeFrame() {
     super("Lights color change");
     lightStates = new DefaultListModel<>();
-    
+
     JPanel buttonPanel = new JPanel();
     JButton changeColorButton = new JButton("Add Bulb Color");
-    ColorChanger color = new ColorChanger(getContentPane(), getBackground(), lightStates);
+    ColorChanger color = new ColorChanger(getContentPane(), getBackground(),
+        lightStates);
     changeColorButton.addActionListener(color);
     buttonPanel.add(changeColorButton);
-    
+
     JButton setColorButton = new JButton("Start Colors");
     final LightChangeTimer lightChangeTimer = new LightChangeTimer(lightStates);
     setColorButton.addActionListener(lightChangeTimer);
     buttonPanel.add(setColorButton);
-    
+
     JButton stopButton = new JButton("Stop Colors");
     stopButton.addActionListener(new ActionListener() {
       @Override
@@ -51,34 +52,34 @@ public class LightColorChangeFrame extends JFrame {
       }
     });
     buttonPanel.add(stopButton);
-    
+
     Container content = getContentPane();
     content.add(buttonPanel);
-    
+
     colorList = new JList<>(lightStates);
     colorList.setVisibleRowCount(4);
     colorList.setSelectedIndex(0);
     JScrollPane listPane = new JScrollPane(colorList);
-    listPane.setPreferredSize(new Dimension(300,100));
-    
+    listPane.setPreferredSize(new Dimension(300, 100));
+
     JPanel listPanel = new JPanel();
     listPanel.setBackground(Color.white);
-    
+
     Border listPanelBorder = BorderFactory.createTitledBorder("Added colors");
     listPanel.setBorder(listPanelBorder);
     listPanel.add(listPane);
     content.add(listPanel, BorderLayout.CENTER);
-    
-    
-    Border buttonPanelBorder = BorderFactory.createTitledBorder("Change Selected");
+
+    Border buttonPanelBorder = BorderFactory
+        .createTitledBorder("Change Selected");
 
     buttonPanel.setBackground(Color.white);
     buttonPanel.setBorder(buttonPanelBorder);
     buttonPanel.add(changeColorButton);
-    
+
     content.add(buttonPanel, BorderLayout.SOUTH);
-    
-    setPreferredSize(new Dimension(400,250));
+
+    setPreferredSize(new Dimension(400, 250));
     pack();
     setVisible(true);
   }
