@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -36,9 +38,19 @@ public class LightColorChangeFrame extends JFrame {
     changeColorButton.addActionListener(color);
     buttonPanel.add(changeColorButton);
     
-    JButton setColorButton = new JButton("Set Bulb Colors");
-    setColorButton.addActionListener(new LightChangeTimer(lightStates));
+    JButton setColorButton = new JButton("Start Colors");
+    final LightChangeTimer lightChangeTimer = new LightChangeTimer(lightStates);
+    setColorButton.addActionListener(lightChangeTimer);
     buttonPanel.add(setColorButton);
+    
+    JButton stopButton = new JButton("Stop Colors");
+    stopButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        lightChangeTimer.stopTimer();
+      }
+    });
+    buttonPanel.add(stopButton);
     
     Container content = getContentPane();
     content.add(buttonPanel);

@@ -45,6 +45,10 @@ public class LightChangeTimer implements ActionListener {
       }
     });
   }
+  
+  public void stopTimer() {
+    this.timer.stop();
+  }
 
   @Override
   public void actionPerformed(ActionEvent e) {
