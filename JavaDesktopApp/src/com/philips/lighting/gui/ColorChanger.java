@@ -15,8 +15,9 @@ public class ColorChanger implements ActionListener {
   private Component contentPane;
   private Color background;
   private DefaultListModel<PHLightState> lightStates;
-  
-  public ColorChanger(Component contentPane, Color backgroundColor, DefaultListModel<PHLightState> lightStates) {
+
+  public ColorChanger(Component contentPane, Color backgroundColor,
+      DefaultListModel<PHLightState> lightStates) {
     this.contentPane = contentPane;
     this.background = backgroundColor;
     this.lightStates = lightStates;
