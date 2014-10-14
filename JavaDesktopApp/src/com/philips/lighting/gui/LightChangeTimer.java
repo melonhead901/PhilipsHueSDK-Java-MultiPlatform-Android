@@ -30,7 +30,7 @@ public class LightChangeTimer implements ActionListener {
     final List<PHLight> lights = bridge.getResourceCache().getAllLights();
 
     this.currentIndex = 0;
-    this.timer = new Timer(5000, new ActionListener() {
+    this.timer = new Timer(15000, new ActionListener() {
 
       @Override
       public void actionPerformed(ActionEvent e) {
