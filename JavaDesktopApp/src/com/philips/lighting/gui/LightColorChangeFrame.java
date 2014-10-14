@@ -25,19 +25,20 @@ public class LightColorChangeFrame extends JFrame {
    */
   private static final long serialVersionUID = 1807091262601041714L;
 
-  private DefaultListModel<PHLightState> lightStates;
-  private JList<PHLightState> colorList;
+  private final DefaultListModel<PHLightState> lightStates;
+  private final JList<PHLightState> colorList;
 
   public LightColorChangeFrame() {
     super("Lights color change");
     lightStates = new DefaultListModel<>();
 
     JPanel buttonPanel = new JPanel();
-    JButton changeColorButton = new JButton("Add Bulb Color");
+
+    JButton addColorButton = new JButton("Add Bulb Color");
     ColorChanger color = new ColorChanger(getContentPane(), getBackground(),
         lightStates);
-    changeColorButton.addActionListener(color);
-    buttonPanel.add(changeColorButton);
+    addColorButton.addActionListener(color);
+    buttonPanel.add(addColorButton);
 
     JButton setColorButton = new JButton("Start Colors");
     final LightChangeTimer lightChangeTimer = new LightChangeTimer(lightStates);
@@ -62,6 +63,17 @@ public class LightColorChangeFrame extends JFrame {
     JScrollPane listPane = new JScrollPane(colorList);
     listPane.setPreferredSize(new Dimension(300, 100));
 
+    JButton removeColorButton = new JButton("Add Bulb Color");
+    removeColorButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (colorList.getSelectedIndex() != -1) {
+          colorList.remove(colorList.getSelectedIndex());
+        }
+      }
+    });
+    buttonPanel.add(removeColorButton);
+
     JPanel listPanel = new JPanel();
     listPanel.setBackground(Color.white);
 
@@ -75,7 +87,7 @@ public class LightColorChangeFrame extends JFrame {
 
     buttonPanel.setBackground(Color.white);
     buttonPanel.setBorder(buttonPanelBorder);
-    buttonPanel.add(changeColorButton);
+    buttonPanel.add(addColorButton);
 
     content.add(buttonPanel, BorderLayout.SOUTH);
 
